@@ -47,7 +47,7 @@ class ConverterListener implements EventSubscriberInterface
     public function onKernelController(FilterControllerEvent $event)
     {
         $request = $event->getRequest();
-        $route = $this->routes->get($request->attributes->get('_route'));
+        $route = $this->routes->get($request->attributes->get('_route') ?? '');
         if ($route && $converters = $route->getOption('_converters')) {
             foreach ($converters as $name => $callback) {
                 $callback = $this->callbackResolver->resolveCallback($callback);

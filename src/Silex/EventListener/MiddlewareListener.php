@@ -45,7 +45,7 @@ class MiddlewareListener implements EventSubscriberInterface
     public function onKernelRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
-        $routeName = $request->attributes->get('_route');
+        $routeName = $request->attributes->get('_route') ?? '';
         if (!$route = $this->app['routes']->get($routeName)) {
             return;
         }
@@ -70,7 +70,7 @@ class MiddlewareListener implements EventSubscriberInterface
     public function onKernelResponse(FilterResponseEvent $event)
     {
         $request = $event->getRequest();
-        $routeName = $request->attributes->get('_route');
+        $routeName = $request->attributes->get('_route') ?? '';
         if (!$route = $this->app['routes']->get($routeName)) {
             return;
         }
